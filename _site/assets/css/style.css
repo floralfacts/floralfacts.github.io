@@ -1,0 +1,381 @@
+html {
+  font-size: 0;
+  background: #EFF0F1;
+}
+
+.header-text {
+  font-family: 'Fugaz One', sans-serif;
+  text-align: left;
+}
+
+.body-text {
+  font-family: 'Comfortaa', sans-serif;
+  font-size: 14pt;
+  line-height: 18pt;
+  text-align: left;
+}
+
+.is-h1 {
+  font-size: 30pt;
+  line-height: 40pt;
+}
+
+.is-h2 {
+  font-size: 22pt;
+}
+
+.is-h3 {
+  font-size: 18pt;
+}
+
+.is-h4 {
+  font-size: 14pt;
+}
+
+span.header-text {
+  margin-right: 5pt;
+}
+
+.link-holder-left {
+  text-align: left;
+  margin: 10pt 0;
+  margin-bottom: 20pt;
+}
+
+.centered {
+  text-align: center !important;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.paper {
+  margin: 0pt auto;
+  padding: 40pt;
+  width: 450pt;
+  background: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}
+
+.puzzle-block {
+  margin: 20pt 0;
+  text-align: left;
+}
+
+.word-bank {
+  border: 2px dashed black;
+  vertical-align: top;
+  padding: 10pt 0;
+  text-align: center;
+}
+
+.word-column {
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 14pt;
+}
+
+.word-column:nth-child(1) {
+  margin-left: 0;
+}
+
+.word-option {
+  padding: 5px;
+  font-family: 'Comfortaa', sans-serif;
+  font-size: 14pt;
+  text-transform: uppercase;
+}
+
+.plant-block {
+  vertical-align: middle;
+}
+
+.plant-frame {
+  border: 2px solid black;
+  display: inline-block;
+  width: 120pt;
+  height: 120pt;
+  vertical-align: middle;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-position: center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.plant-frame .plant-picture {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.plant-name {
+  display: inline-block;
+  width: 320pt;
+  padding: 0;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.blank-container {
+  vertical-align: middle;
+  padding: 0 7pt;
+}
+
+.blank-word {
+  vertical-align: top;
+  display: inline-block;
+  margin: 0 7pt;
+}
+
+#fun-fact-instructions {
+  margin-top: 25pt;
+}
+
+#fun-fact {
+  margin-top: 15pt;
+  margin-bottom: 10pt;
+}
+
+#fun-fact .blank-word {
+  padding-left: 0;
+  padding-right: 14pt;
+}
+
+.credits-text {
+  text-align: center;
+  font-size: 10pt;
+  margin-top: 5pt;
+  opacity: 0.6;
+}
+
+.blank-space {
+  width: 20pt;
+  display: inline-block;
+  text-align: center;
+  margin: 0 2pt;
+  vertical-align: top;
+}
+
+.blank-content, .blank-label {
+  height: 15pt;
+  font-family: 'Comfortaa', sans-serif;
+  text-transform: uppercase;
+}
+
+.blank-content {
+  padding-top: 5pt;
+  font-size: 14pt;
+}
+
+.blank-label {
+  border-top: 2px solid black;
+  padding-top: 5pt;
+  font-size: 10pt;
+}
+
+.answer-text {
+  font-family: 'Comfortaa', sans-serif;
+  font-size: 12pt;
+  line-height: 14pt;
+  text-align: left;
+  opacity: 0.6;
+}
+
+.rotated-180 {
+  transform: rotate(180deg);
+}
+
+.answer-text .bold {
+  font-family: 'Fugaz One', sans-serif;
+}
+
+.editor {
+  padding: 30pt;
+  width: 200pt;
+  opacity: 0.5;
+}
+
+.editor:hover {
+  opacity: 1.0;
+}
+
+.editor, .editor input, .editor textarea, .button {
+  font-family: 'Comfortaa', sans-serif;
+  font-size: 12pt;
+}
+
+.editor .header-text {
+  margin-top: 10pt;
+  margin-bottom: 5pt;
+}
+
+body {
+  text-align: center;
+  padding-top: 20pt;
+}
+
+.editor, .paper {
+  vertical-align: top;
+  display: inline-block;
+}
+
+.editor .text-input, .editor .button {
+  display: block;
+  margin: 5pt 0;
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+  min-height: 18pt;
+  box-sizing: border-box;
+}
+
+.editor .text-input {
+  border: 1px solid black;
+  padding: 5pt;
+}
+
+.editor .check-input {
+  margin: 10pt 0 ;
+  text-align: left;
+  font-size: 14pt;
+  line-height: 18pt;
+}
+
+.button {
+  background: black;
+  color: white;
+  padding: 5pt;
+  border-radius: 5pt;
+  text-decoration: none;
+}
+
+.button:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.button.is-danger {
+  background: red;
+  color: white;
+}
+
+.button.is-secondary {
+  background: white;
+  color: black;
+  border: 2px solid black;
+}
+
+@media print {
+  
+  html {
+    background: white;
+  }
+  
+  body {
+    padding-top: 0;
+  }
+  
+  .paper {
+    padding: 30pt;
+    box-shadow: none;
+  }
+  
+  .editor {
+    display: none;
+  }
+  
+  .link-holder-left {
+    display: none;
+  }
+  
+}
+
+.hint {
+  font-family: 'Comfortaa', sans-serif;
+  font-size: 12pt;
+  line-height: 14pt;
+  margin: 10pt 14pt;
+  opacity: 0.6;
+  display: none;
+}
+
+.correct-answer .blank-content {
+  background: #6ff2b3;
+}
+
+.word-option {
+  cursor: pointer;
+}
+
+.crossed-out {
+  text-decoration: line-through;
+  opacity: 0.25;
+}
+
+@media screen and (max-width: 650px) {
+
+  body {
+    padding: 0;
+  }
+
+  .is-h1 {
+    text-align: center;
+    font-size: 35pt;
+    line-height: 40pt;
+    margin-top: 30pt;
+    margin-bottom: 15pt;
+  }
+
+  p.centered-on-responsive {
+    text-align: center;
+  }
+
+  .paper {
+    width: 90vw;
+    margin: 0;
+    padding: 5vw;
+  }
+
+  .plant-frame {
+    margin: 20pt auto;
+    display: block;
+    width: 80vw;
+    height: 80vw;
+  }
+
+  .plant-name {
+    margin: 20pt auto;
+    display: block;
+    width: 90vw;
+  }
+
+  .blank-content {
+    font-size: 20pt;
+    line-height: 20pt;
+    height: 22pt;
+  }
+
+  .word-column {
+    display: inline !important;
+    margin: 0;
+  }
+
+  .word-option {
+    display: inline-block;
+    margin: 5pt;
+  }
+
+  #fun-fact-instructions span, #fun-fact-instructions p {
+    text-align: center;
+  }
+
+  #fun-fact-instructions .header-text {
+    display: block;
+    margin-bottom: 5pt;
+  }
+
+}
