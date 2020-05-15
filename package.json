@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/floralfacts/floralfacts.github.io/issues"
   },
-  "homepage": "https://github.com/floralfacts/floralfacts.github.io#readme"
+  "homepage": "https://github.com/floralfacts/floralfacts.github.io#readme",
+  "dependencies": {
+    "btoa": "^1.2.1",
+    "puppeteer": "^3.0.4"
+  }
 }
