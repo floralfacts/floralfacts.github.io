@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Floral Facts</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa&family=Fugaz+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/reset.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <script src="/assets/js/puzzle.js" defer></script>
+  </head>  
+  <body>
+    <div class="paper">
+      <div>
+        <div class="link-holder-left">
+          <a href="/" class="button is-secondary">Back to Home</a>
+        </div>
+        <h1 class="is-h1 header-text">Floral Facts</h1>
+        <p class="body-text centered-on-responsive">Use the word bank to guess the names of these plants. If you are correct, you will discover a fun fact they have in common!</p>
+      </div>
+      <div class="puzzle-block">
+        <div class="word-bank"></div>
+      </div>
+      <div id="plant-a" class="puzzle-block plant-block">
+        <div class="plant-frame"></div>
+        <div class="plant-name">
+          <div class="blank-container"></div>
+          <div class="hint">
+            <p><span class="is-h4 header-text">Hint:</span><span class="hint-text"></span></p>
+          </div>
+        </div>
+      </div>
+      <div id="plant-b" class="puzzle-block plant-block">
+        <div class="plant-frame"></div>
+        <div class="plant-name">
+          <div class="blank-container"></div>
+          <div class="hint">
+            <p><span class="is-h4 header-text">Hint:</span><span class="hint-text"></span></p>
+          </div>
+        </div>
+      </div>
+      <div id="fun-fact-instructions">
+        <p class="body-text"><span class="is-h2 header-text">Fun Fact</span> Fill in the blanks with the letters from above.</p>
+      </div>
+      <div id="fun-fact" class="puzzle-block blank-container centered"></div>
+      <div>
+        <p class="answer-text rotated-180"><span class="bold">ANSWERS:</span> A is <span id="answer-a"></span>, B is <span id="answer-b"></span>. Fun Fact: <span id="answer-fun-fact"></span>.</p>
+      </div>
+      <p class="body-text credits-text"></p>
+    </div>
+    <div class="editor">
+      <h1 class="is-h1 header-text">Editor</h1>
+      <button id="btn-sample" class="button is-secondary">Get Sample Puzzle</button>
+      <button id="btn-import" class="button is-secondary">Import Puzzle Data</button>
+      <h3 class="is-h3 header-text">Credits</h3>
+      <input id="input-credits" class="text-input" type="text" placeholder="Credits">
+      <h3 class="is-h3 header-text">Plant A</h3>
+      <input id="input-name-a" class="text-input" type="text" placeholder="Name">
+      <input id="input-img-a" class="text-input" type="text" placeholder="Image URL">
+      <input id="input-hint-a" class="text-input" type="text" placeholder="Hint">
+      <h3 class="is-h3 header-text">Plant B</h3>
+      <input id="input-name-b" class="text-input" type="text" placeholder="Name">
+      <input id="input-img-b" class="text-input" type="text" placeholder="Image URL">
+      <input id="input-hint-b" class="text-input" type="text" placeholder="Hint">
+      <h3 class="is-h3 header-text">Fun Fact</h3>
+      <input id="input-fun-fact" class="text-input" type="text" placeholder="Fun Fact">
+      <div class="check-input">
+        <input id="input-reuse-letters" type="checkbox">
+        <span>Reuse Letters?</span>
+      </div>
+      <h3 class="is-h3 header-text">Word Bank</h3>
+      <textarea id="input-word-bank" class="text-input"></textarea>
+      <h3 class="is-h3 header-text">Given Words</h3>
+      <textarea id="input-given-words" class="text-input"></textarea>
+      <button id="btn-update" class="button">Update Puzzle</button>
+      <button id="btn-show" class="button is-secondary">Show Solution</button>
+      <button id="btn-clear" class="button is-danger">Clear Puzzle</button>
+      <h3 class="is-h3 header-text">Export</h3>
+      <button id="btn-save-image" class="button is-secondary">Save as Image</button>
+      <button id="btn-save-pdf" class="button is-secondary">Print as PDF</button>
+      <hr>
+      <button id="btn-export-link" class="button is-secondary">Open in Web Player</button>
+      <button id="btn-export-json" class="button is-secondary">Export as JSON</button>
+      <button id="btn-export-yaml" class="button is-secondary">Export as YAML</button>
+    </div>
+    <script src="/assets/js/editor.js" defer></script>
+  </body>
+</html>
