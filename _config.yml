@@ -10,3 +10,4 @@ exclude:
   - package-lock.json
   - package.json
   - make_puzzle_files.js
+  - build.js
