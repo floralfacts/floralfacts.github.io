@@ -41,7 +41,8 @@
             </tr>
           </thead>
           <tbody>
-          {% for puzzle in site.play %}
+          {% assign puzzles = site.play | sort: "name" %}
+          {% for puzzle in puzzles %}
             {% if puzzle.printerFriendly %}
               {% assign colorType = "B&W" %}
             {% else colorType %}

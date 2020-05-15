@@ -61,3 +61,8 @@ hr {
   }
   
 }
+
+tr:hover {
+  background: #6ff2b3;
+  font-weight: bold;
+}

@@ -119,7 +119,6 @@ function listenToValidateAnswerByWords(containerEl, name, validationFn) {
 }
 
 function main(data, printerFriendlyMode) {
-  console.log(data);
   if (
     (printerFriendlyMode || data.printerFriendly) &&
     data.printImageA &&
