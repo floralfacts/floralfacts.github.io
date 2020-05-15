@@ -1,0 +1,12 @@
+title: "Floral Facts"
+encoding: UTF-8
+kramdown:
+    smart_quotes: ["apos", "apos", "quot", "quot"]
+collections:
+  puzzles:
+    output: true
+exclude:
+  - node_modules/*
+  - package-lock.json
+  - package.json
+  - make_puzzle_files.js

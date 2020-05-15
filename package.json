@@ -1,0 +1,19 @@
+{
+  "name": "floralfacts.github.io",
+  "version": "1.0.0",
+  "description": "Fun floral puzzles for people to play during quarantine.",
+  "main": "build.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/floralfacts/floralfacts.github.io.git"
+  },
+  "author": "vingkan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/floralfacts/floralfacts.github.io/issues"
+  },
+  "homepage": "https://github.com/floralfacts/floralfacts.github.io#readme"
+}
