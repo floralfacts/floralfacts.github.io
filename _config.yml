@@ -3,7 +3,7 @@ encoding: UTF-8
 kramdown:
     smart_quotes: ["apos", "apos", "quot", "quot"]
 collections:
-  puzzles:
+  play:
     output: true
 exclude:
   - node_modules/*

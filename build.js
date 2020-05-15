@@ -1,7 +1,7 @@
 const fs = require("fs");
 
 const inFile = "assets/json/puzzles.json";
-const outDir = "_puzzles";
+const outDir = "_play";
 
 const rawPuzzleData = fs.readFileSync(inFile);
 const puzzleDataArray = JSON.parse(rawPuzzleData);
@@ -11,6 +11,7 @@ puzzleDataArray.forEach((data, index) => {
     const filename = `${outDir}/${number}.md`;
     const lines = [
         "---",
+        "layout: puzzle",
         `name: ${number}`,
         `difficulty: ${data.difficulty || "Not Rated"}`,
         `printerFriendly: ${data.printerFriendly}`,
