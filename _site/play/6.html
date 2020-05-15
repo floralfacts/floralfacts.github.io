@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Floral Facts</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa&family=Fugaz+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/reset.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/confetti.css">
+    <script src="../assets/js/puzzle.js" defer></script>
+  </head>
+  <body>
+    <div id="lost" class="paper hidden">
+      <h1 class="is-h1 header-text">Puzzle Not Found</h1>
+        <p class="body-text">Sorry, we couldn't find that puzzle. Do you have the right link?</p>
+    </div>
+    <div id="page" class="paper">
+      <div>
+        <div class="link-holder-left">
+          <a href="/" class="button is-secondary">Back to Home</a>
+        </div>
+        <h1 class="is-h1 header-text">Floral Facts</h1>
+        <p class="body-text centered-on-responsive">Use the word bank to guess the names of these plants. If you are correct, you will discover a fun fact they have in common!</p>
+      </div>
+      <div class="puzzle-block">
+        <div class="word-bank"></div>
+      </div>
+      <div id="plant-a" class="puzzle-block plant-block">
+        <div class="plant-frame"></div>
+        <div class="plant-name">
+          <div class="blank-container"></div>
+          <div class="hint">
+            <p><span class="is-h4 header-text">Hint:</span><span class="hint-text"></span></p>
+          </div>
+        </div>
+      </div>
+      <div id="plant-b" class="puzzle-block plant-block">
+        <div class="plant-frame"></div>
+        <div class="plant-name">
+          <div class="blank-container"></div>
+          <div class="hint">
+            <p><span class="is-h4 header-text">Hint:</span><span class="hint-text"></span></p>
+          </div>
+        </div>
+      </div>
+      <div id="fun-fact-instructions">
+        <p class="body-text"><span class="is-h2 header-text">Fun Fact</span> Fill in the blanks with the letters from above.</p>
+      </div>
+      <div id="fun-fact" class="puzzle-block blank-container centered"></div>
+      <div>
+        <p class="answer-text rotated-180"><span class="bold">ANSWERS:</span> A is <span id="answer-a"></span>, B is <span id="answer-b"></span>. Fun Fact: <span id="answer-fun-fact"></span>.</p>
+      </div>
+      <p class="body-text credits-text"></p>
+    </div>
+    <div class="confetti-container hidden">
+      <div class="confetti"></div>
+      <div class="confetti"></div>
+      <div class="confetti"></div>
+      <div class="confetti"></div>
+      <div class="confetti"></div>
+      <div class="confetti"></div>
+      <div class="confetti"></div>
+      <div class="confetti"></div>
+      <div class="confetti"></div>
+      <div class="confetti"></div>
+    </div>
+    <div id="raw" class="hidden">{
+    "difficulty": "Intermediate",
+    "credits": "Photos from the Wikimedia Commons.",
+    "nameA": "Kangaroo Paw",
+    "imageA": "https://upload.wikimedia.org/wikipedia/commons/6/61/Anigozanthos_manglesii_gnangarra-1005.jpg",
+    "hintA": "Name is inspired by an Outback animal.",
+    "nameB": "Apple Berry",
+    "imageB": "https://upload.wikimedia.org/wikipedia/commons/2/2c/Billardiera_scandens_Lawson_fruit_email.jpg",
+    "hintB": "Rumored to taste like the fruit it gets its name, but not its looks from.",
+    "funFact": "Discovered by a French botanist in Australia",
+    "wordBank": [
+        "MANGO",
+        "EMU",
+        "PLATYPUS",
+        "RIVER",
+        "FUZZY",
+        "JAY",
+        "CAMOMILE",
+        "CACTI"
+    ],
+    "given": [],
+    "reuseLetters": false
+}
+</div>
+    <script src="../assets/js/play.js" defer></script>
+  </body>
+</html>

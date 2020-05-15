@@ -34,14 +34,10 @@ const printCSS = `
 * Based on Rising Stack:
 * https://blog.risingstack.com/pdf-from-html-node-js-puppeteer/
 */
-async function savePageAs(url, fileType) {
+async function savePageAs(browser, url, fileType) {
     if (fileType !== "pdf" && fileType !== "png") {
         throw new Error(`Invalid file type: ${fileType}`);
     }
-    const browser = await puppeteer.launch({
-        headless: true,
-        args: ["--no-sandbox"],
-    });
     const page = await browser.newPage();
     await page.goto(url, {
         waitUntil: "networkidle0",
@@ -63,7 +59,6 @@ async function savePageAs(url, fileType) {
             fullPage: true,
         });
     }
-    browser.close();
     return fileRes;
 }
 
@@ -72,49 +67,71 @@ const rawPuzzleData = fs.readFileSync(inFile);
 const puzzleDataArray = JSON.parse(rawPuzzleData);
 console.log("Read and parsed puzzle data.");
 
-// Dispatch local scrapes to generate PDFs and PNGs
-const scrapePromises = [];
-puzzleDataArray.forEach((data, index) => {
-    const number = index + 1;
-    const rawData = JSON.stringify(data);
-    const encoded = encodeURIComponent(btoa(rawData));
-    const url = `file:${__dirname}/_layouts/puzzle.html?d=${encoded}`;
-    let pdfPromise = savePageAs(url + "&print=true", "pdf");
-    pdfPromise.filename = `${outDirPDFs}/${number}.pdf`;
-    scrapePromises.push(pdfPromise);
-    let pngPromise = savePageAs(url, "png");
-    pngPromise.filename = `${outDirPNGs}/${number}.png`;
-    scrapePromises.push(pngPromise);
-});
+async function main() {
 
-// Write markdown files for Jeykll entries
-puzzleDataArray.forEach((data, index) => {
-    const number = index + 1;
-    const filename = `${outDirEntries}/${number}.md`;
-    const lines = [
-        "---",
-        "layout: puzzle",
-        `name: ${number}`,
-        `difficulty: ${data.difficulty || "Not Rated"}`,
-        `printerFriendly: ${data.printerFriendly}`,
-        "---",
-        JSON.stringify(data, null, 4),
-    ];
-    fs.writeFileSync(filename, lines.join("\n"));
-    console.log(`(${index + 1}/${puzzleDataArray.length}) Wrote puzzle entry to: ${filename}`);
-});
-console.log("Wrote all puzzle entries.");
-
-// Write PDFs and PNGs
-Promise.all(scrapePromises).then((files) => {
-    files.forEach((file, i) => {
-        const filename = scrapePromises[i].filename;
-        fs.writeFileSync(filename, file, "binary");
-        console.log(`(${i + 1}/${files.length}) Wrote puzzle file to: ${filename}`);
+    // Dispatch local scrapes to generate PDFs and PNGs
+    const browser = await puppeteer.launch({
+        headless: true,
+        args: ["--no-sandbox"],
     });
-    console.log("Wrote all PDF/PNG files.");
-}).catch((err) => {
-    console.log("Failed to write PDF/PNG files:");
-    console.error(err);
-    process.exit();
+    const scrapePromises = [];
+    puzzleDataArray.forEach((data, index) => {
+        const number = index + 1;
+        const rawData = JSON.stringify(data);
+        const encoded = encodeURIComponent(btoa(rawData));
+        const url = `file:${__dirname}/_layouts/puzzle.html?d=${encoded}`;
+        let pdfPromise = savePageAs(browser, url + "&print=true", "pdf").then((res) => {
+            console.log(`(${index + 1}/${puzzleDataArray.length}) Scraping puzzle PDF...`);
+            return res;
+        });
+        pdfPromise.filename = `${outDirPDFs}/${number}.pdf`;
+        scrapePromises.push(pdfPromise);
+        let pngPromise = savePageAs(browser, url, "png").then((res) => {
+            console.log(`(${index + 1}/${puzzleDataArray.length}) Scraping puzzle PNG...`);
+            return res;
+        });
+        pngPromise.filename = `${outDirPNGs}/${number}.png`;
+        scrapePromises.push(pngPromise);
+    });
+
+    // Write markdown files for Jeykll entries
+    puzzleDataArray.forEach((data, index) => {
+        const number = index + 1;
+        const isPrinterFriendly = data.isPrinterFriendly || (data.printImageA && data.printImageB);
+        const filename = `${outDirEntries}/${number}.md`;
+        const lines = [
+            "---",
+            "layout: puzzle",
+            `name: ${number}`,
+            `difficulty: ${data.difficulty || "Not Rated"}`,
+            `printerFriendly: ${isPrinterFriendly ? "true" : "false"}`,
+            "---",
+            JSON.stringify(data, null, 4),
+        ];
+        fs.writeFileSync(filename, lines.join("\n"));
+        console.log(`(${index + 1}/${puzzleDataArray.length}) Wrote puzzle entry to: ${filename}`);
+    });
+    console.log("Wrote all puzzle entries.");
+
+    // Write PDFs and PNGs
+    return Promise.all(scrapePromises).then((files) => {
+        console.log("Scraped all puzzle PDFs and PNGs.");
+        files.forEach((file, i) => {
+            const filename = scrapePromises[i].filename;
+            fs.writeFileSync(filename, file, "binary");
+            console.log(`(${i + 1}/${files.length}) Wrote puzzle file to: ${filename}`);
+        });
+        browser.close();
+        console.log("Wrote all PDF/PNG files.");
+    }).catch((err) => {
+        browser.close();
+        console.log("Failed to write PDF/PNG files:");
+        console.error(err);
+        process.exit();
+    });
+
+}
+
+main().then((done) => {
+    console.log("Done.");
 });
