@@ -216,11 +216,17 @@ btnSample.addEventListener("click", e => {
 
 btnImport.addEventListener("click", e => {
   const frontMatterLine = "\n---\n";
+  const dataURLParam = "?d=";
   let inputString = prompt("Enter Puzzle Data Here:");
   try {
     const frontMatterIndex = inputString.indexOf(frontMatterLine);
+    const dataURLParamIndex = inputString.indexOf(dataURLParam);
     if (frontMatterIndex > -1) {
       inputString = inputString.substr(frontMatterIndex + frontMatterLine.length);
+    }
+    if (dataURLParamIndex > -1) {
+      inputString = inputString.substr(dataURLParamIndex + dataURLParam.length);
+      inputString = atob(decodeURIComponent(inputString));
     }
     let puzzleData = JSON.parse(inputString);
     fillFormFromJSON(puzzleData);
