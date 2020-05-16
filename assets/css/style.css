@@ -43,7 +43,8 @@ span.header-text {
 }
 
 .link-holder-left .button {
-  margin: 0 !important;
+  margin: 0;
+  margin-right: 10pt;
 }
 
 .centered {
