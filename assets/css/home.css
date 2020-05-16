@@ -49,6 +49,10 @@ hr {
   margin-bottom: 20px;
 }
 
+.home-logo {
+  width: 200px;
+}
+
 @media screen and (max-width: 640px) {
   
   .paper {
