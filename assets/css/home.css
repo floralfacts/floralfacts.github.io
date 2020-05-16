@@ -45,12 +45,21 @@ hr {
   display: none;
 }
 
+.home-logo {
+  width: 200px;
+}
+
+tr:hover {
+  background: #6ff2b3;
+  font-weight: bold;
+}
+
 .demo-holder {
   margin-bottom: 20px;
 }
 
-.home-logo {
-  width: 200px;
+.demo-holder .button {
+  padding: 15pt 10pt;
 }
 
 @media screen and (max-width: 640px) {
@@ -64,9 +73,4 @@ hr {
     margin: 20px auto;
   }
   
-}
-
-tr:hover {
-  background: #6ff2b3;
-  font-weight: bold;
 }

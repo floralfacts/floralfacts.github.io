@@ -42,6 +42,10 @@ span.header-text {
   margin-bottom: 20pt;
 }
 
+.link-holder-left .button {
+  margin: 0 !important;
+}
+
 .centered {
   text-align: center !important;
 }
@@ -248,22 +252,26 @@ body {
 .button {
   background: black;
   color: white;
-  padding: 5pt;
+  padding: 7pt 10pt;
+  margin: 7pt;
   border-radius: 5pt;
   text-decoration: none;
+  border: 2px solid black;
 }
 
 .button:hover {
-  opacity: 0.5;
+  opacity: 1.0;
   cursor: pointer;
+  border: 2px solid black;
+  background: #6ff2b3;
 }
 
-.button.is-danger {
+.is-danger {
   background: red;
   color: white;
 }
 
-.button.is-secondary {
+.is-secondary {
   background: white;
   color: black;
   border: 2px solid black;
