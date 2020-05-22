@@ -8,6 +8,7 @@ function cleanWords(raw) {
 }
 
 function makeBlanksEl(words, domEl, editable) {
+  let hasSetAutofocus = false;
   return words.map(word => {
     let el = domEl.createElement("div");
     el.classList.add("blank-word");
@@ -18,6 +19,10 @@ function makeBlanksEl(words, domEl, editable) {
       content.classList.add("blank-content");
       if (!blank.given && editable) {
         content.contentEditable = true;
+        if (!hasSetAutofocus) {
+          content.autofocus = true;
+          hasSetAutofocus = true;
+        }
       }
       let label = domEl.createElement("div");
       label.classList.add("blank-label");
