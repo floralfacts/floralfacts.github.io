@@ -76,7 +76,7 @@ async function main() {
     });
     const scrapePromises = [];
     puzzleDataArray.forEach((data, index) => {
-        const number = index + 1;
+        const id = data.id;
         const rawData = JSON.stringify(data);
         const encoded = encodeURIComponent(btoa(rawData));
         const url = `file:${__dirname}/_layouts/puzzle.html?d=${encoded}`;
@@ -84,25 +84,25 @@ async function main() {
             console.log(`(${index + 1}/${puzzleDataArray.length}) Scraping puzzle PDF...`);
             return res;
         });
-        pdfPromise.filename = `${outDirPDFs}/${number}.pdf`;
+        pdfPromise.filename = `${outDirPDFs}/${id}.pdf`;
         scrapePromises.push(pdfPromise);
         let pngPromise = savePageAs(browser, url, "png").then((res) => {
             console.log(`(${index + 1}/${puzzleDataArray.length}) Scraping puzzle PNG...`);
             return res;
         });
-        pngPromise.filename = `${outDirPNGs}/${number}.png`;
+        pngPromise.filename = `${outDirPNGs}/${id}.png`;
         scrapePromises.push(pngPromise);
     });
 
     // Write markdown files for Jeykll entries
     puzzleDataArray.forEach((data, index) => {
-        const number = index + 1;
+        const id = data.id;
         const isPrinterFriendly = data.isPrinterFriendly || (data.printImageA && data.printImageB);
-        const filename = `${outDirEntries}/${number}.md`;
+        const filename = `${outDirEntries}/${id}.md`;
         const lines = [
             "---",
             "layout: puzzle",
-            `name: ${number}`,
+            `name: ${id}`,
             `difficulty: ${data.difficulty || "Not Rated"}`,
             `printerFriendly: ${isPrinterFriendly ? "true" : "false"}`,
             "---",
