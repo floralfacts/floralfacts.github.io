@@ -1,11 +1,20 @@
 const fs = require("fs");
 const btoa = require("btoa");
-const puppeteer = require("puppeteer");
+const puppeteer = require("puppeteer")
+const gm = require("gm");
 
 const inFile = "assets/json/puzzles.json";
 const outDirEntries = "_play";
 const outDirPDFs = "assets/pdf";
 const outDirPNGs = "assets/png";
+
+const imageWidth = 160;
+const imageHeight = 160;
+
+const inDirFlowers = "flower_images/flower";
+const inDirSketches = "flower_images/sketch";
+const outDirFlowers = "assets/flower";
+const outDirSketches = "assets/sketch";
 
 const printCSS = `
     html {
@@ -62,12 +71,53 @@ async function savePageAs(browser, url, fileType) {
     return fileRes;
 }
 
-// Read puzzle data
-const rawPuzzleData = fs.readFileSync(inFile);
-const puzzleDataArray = JSON.parse(rawPuzzleData);
-console.log("Read and parsed puzzle data.");
+async function formatImage(imageInFile, imageOutFile) {
+    return new Promise((resolve, reject) => {
+        gm(imageInFile)
+            .resize(imageWidth, imageHeight, "^")
+            .gravity("Center")
+            .crop(imageWidth, imageHeight)
+            .write(imageOutFile, (err) => {
+                if (!err) {
+                    resolve();
+                } else {
+                    reject(err);
+                }
+            });
+    });
+}
+
+async function formatImageDir(inDirImage, outDirImage) {
+    return new Promise((resolve, reject) => {
+        fs.readdir(inDirImage, (err, files) => {
+            if (!err) {
+                // Filter out hidden files (From S/O).
+                // https://stackoverflow.com/questions/18973655/how-to-ingnore-hidden-files-in-fs-readdir-result
+                files = files.filter(item => !(/(^|\/)\.[^\/\.]/g).test(item));
+                const promises = files.map((filename) => {
+                    const inFileImage = `${inDirImage}/${filename}`;
+                    const outFileImage = `${outDirImage}/${filename}`;
+                    return formatImage(inFileImage, outFileImage);
+                });
+                Promise.all(promises).then(resolve).catch(reject);
+            } else {
+                reject(err);
+            }
+        });
+    });
+}
 
 async function main() {
+
+    // Read puzzle data
+    const rawPuzzleData = fs.readFileSync(inFile);
+    const puzzleDataArray = JSON.parse(rawPuzzleData);
+    console.log("Read and parsed puzzle data.");
+
+    // Format puzzle images before generating PDFs and PNGs
+    await formatImageDir(inDirFlowers, outDirFlowers);
+    await formatImageDir(inDirSketches, outDirSketches);
+    console.log("Formatted all images.");
 
     // Dispatch local scrapes to generate PDFs and PNGs
     const browser = await puppeteer.launch({

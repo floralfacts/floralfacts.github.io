@@ -7,6 +7,7 @@ collections:
     output: true
 exclude:
   - node_modules/*
+  - flower_imaegs/*
   - package-lock.json
   - package.json
   - make_puzzle_files.js

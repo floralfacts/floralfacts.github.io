@@ -106,3 +106,6 @@ dist
 # Jekyll built site
 _site/
 
+# Flower Images
+flower_images/
+
