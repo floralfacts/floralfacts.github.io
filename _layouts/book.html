@@ -12,12 +12,14 @@
     <link rel="stylesheet" href="/assets/css/style.css">
     <style type="text/css">
       
-      .book {
-        width: 600pt;
+      .bookpage {
+        width: 612pt;
+        height: 792pt;
         margin: 0 auto;
+        padding: 6pt;
       }
 
-      .book img {
+      .bookpage img {
         width: 100%;
       }
 
@@ -51,10 +53,14 @@
       <div class="instructions body-text">
         <p><span class="printer" onclick="window.print()">Print this page</span> and send it to a friend :)</p>
       </div>
-      <img alt="Cover" src="/assets/img/cover.png">
+      <div class="bookpage">
+        <img alt="Cover" src="/assets/img/cover.png">
+      </div>
       {% assign puzzles = site.play | sort: "name" %}
       {% for puzzle in puzzles %}
-        <img alt="Puzzle {puzzle.slug}" src="/assets/book/{{ puzzle.slug }}.png">
+        <div class="bookpage">
+          <img alt="Puzzle {puzzle.slug}" src="/assets/book/{{ puzzle.slug }}.png">
+        </div>
       {% endfor %}
     </div>
   </body>
