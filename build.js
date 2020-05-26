@@ -7,6 +7,7 @@ const inFile = "assets/json/puzzles.json";
 const outDirEntries = "_play";
 const outDirPDFs = "assets/pdf";
 const outDirPNGs = "assets/png";
+const outDirBook = "assets/book";
 
 const imageWidth = 160;
 const imageHeight = 160;
@@ -36,6 +37,11 @@ const printCSS = `
 
     .link-holder-left {
         display: none;
+    }
+
+    :focus {
+        outline: none;
+        opacity: 0;
     }
 `;
 
@@ -114,12 +120,12 @@ async function main() {
     const puzzleDataArray = JSON.parse(rawPuzzleData);
     console.log("Read and parsed puzzle data.");
 
-    // Format puzzle images before generating PDFs and PNGs
+    // Format puzzle images before generating PDFs, PNGs, annd book pages
     await formatImageDir(inDirFlowers, outDirFlowers);
     await formatImageDir(inDirSketches, outDirSketches);
     console.log("Formatted all images.");
 
-    // Dispatch local scrapes to generate PDFs and PNGs
+    // Dispatch local scrapes to generate PDFs, PNGs, annd book pages
     const browser = await puppeteer.launch({
         headless: true,
         args: ["--no-sandbox"],
@@ -142,6 +148,12 @@ async function main() {
         });
         pngPromise.filename = `${outDirPNGs}/${id}.png`;
         scrapePromises.push(pngPromise);
+        let bookPromise = savePageAs(browser, url + "&print=true", "png").then((res) => {
+            console.log(`(${index + 1}/${puzzleDataArray.length}) Scraping puzzle book page...`);
+            return res;
+        });
+        bookPromise.filename = `${outDirBook}/${id}.png`;
+        scrapePromises.push(bookPromise);
     });
 
     // Write markdown files for Jeykll entries
@@ -163,19 +175,19 @@ async function main() {
     });
     console.log("Wrote all puzzle entries.");
 
-    // Write PDFs and PNGs
+    // Write PDFs, PNGs, and book pages
     return Promise.all(scrapePromises).then((files) => {
-        console.log("Scraped all puzzle PDFs and PNGs.");
+        console.log("Scraped all puzzle PDFs, PNGs, and book pages.");
         files.forEach((file, i) => {
             const filename = scrapePromises[i].filename;
             fs.writeFileSync(filename, file, "binary");
             console.log(`(${i + 1}/${files.length}) Wrote puzzle file to: ${filename}`);
         });
         browser.close();
-        console.log("Wrote all PDF/PNG files.");
+        console.log("Wrote all PDF/PNG/Book files.");
     }).catch((err) => {
         browser.close();
-        console.log("Failed to write PDF/PNG files:");
+        console.log("Failed to write PDF/PNG/Book files:");
         console.error(err);
         process.exit();
     });
