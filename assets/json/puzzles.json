@@ -432,35 +432,6 @@
   {
     "id": "17",
     "difficulty": "Expert",
-    "nameA": "saucer plant",
-    "imageA": "https://upload.wikimedia.org/wikipedia/commons/4/47/Aeonium_undulatum_flower_head_4.jpg",
-    "printImageA": "",
-    "hintA": "Some people think the name has to do with aliens.",
-    "nameB": "tower of jewels",
-    "imageB": "https://upload.wikimedia.org/wikipedia/commons/f/f6/Echium_wildpretii_LC0204.jpg",
-    "printImageB": "",
-    "hintB": "Grows up to 10 feet and blooms shiny red flowers.",
-    "credits": "Images from Wikimedia Commons.",
-    "printCredits": "",
-    "funFact": "native to the canary islands",
-    "reuseLetters": false,
-    "given": [],
-    "wordBank": [
-      "to",
-      "at",
-      "house",
-      "court",
-      "aster",
-      "shrub",
-      "wealth",
-      "desert",
-      "bright",
-      "garden"
-    ]
-  },
-  {
-    "id": "18",
-    "difficulty": "Expert",
     "nameA": "Bird of Paradise",
     "imageA": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Strelitzia_larger.jpg/1920px-Strelitzia_larger.jpg",
     "printImageA": "",
@@ -488,7 +459,7 @@
     ]
   },
   {
-    "id": "19",
+    "id": "18",
     "difficulty": "Expert",
     "nameA": "Corpse flower",
     "imageA": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Rafflesia_kerrii_flower.jpg/1600px-Rafflesia_kerrii_flower.jpg",
@@ -515,7 +486,7 @@
     ]
   },
   {
-    "id": "20",
+    "id": "19",
     "difficulty": "Expert",
     "nameA": "purple fire spikes",
     "imageA": "https://floralfacts.github.io/assets/flower/purplefirespikes.jpg",
@@ -541,6 +512,35 @@
       "frayed",
       "velvet",
       "lavender"
+    ]
+  },
+  {
+    "id": "20",
+    "difficulty": "Expert",
+    "nameA": "saucer plant",
+    "imageA": "https://upload.wikimedia.org/wikipedia/commons/4/47/Aeonium_undulatum_flower_head_4.jpg",
+    "printImageA": "",
+    "hintA": "Some people think the name has to do with aliens.",
+    "nameB": "tower of jewels",
+    "imageB": "https://upload.wikimedia.org/wikipedia/commons/f/f6/Echium_wildpretii_LC0204.jpg",
+    "printImageB": "",
+    "hintB": "Grows up to 10 feet and blooms shiny red flowers.",
+    "credits": "Images from Wikimedia Commons.",
+    "printCredits": "",
+    "funFact": "native to the canary islands",
+    "reuseLetters": false,
+    "given": [],
+    "wordBank": [
+      "to",
+      "at",
+      "house",
+      "court",
+      "aster",
+      "shrub",
+      "wealth",
+      "desert",
+      "bright",
+      "garden"
     ]
   }
 ]

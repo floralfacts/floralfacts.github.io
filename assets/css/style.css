@@ -300,6 +300,11 @@ body {
   .link-holder-left {
     display: none;
   }
+
+  :focus {
+    outline: none;
+    opacity: 0;
+  }
   
 }
 
