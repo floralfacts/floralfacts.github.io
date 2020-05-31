@@ -249,7 +249,13 @@ function fillWordBank(inputData, domEl) {
       }
       let el = domEl.createElement("div");
       el.classList.add("word-option");
-      el.innerText = word;
+      let caption = domEl.createElement("span");
+      caption.setAttribute("aria-label", `Word number ${i + 1}: ${word}.`);
+      let option = domEl.createElement("span");
+      option.setAttribute("aria-hidden", true);
+      option.innerText = word;
+      el.appendChild(caption);
+      el.appendChild(option);
       col.appendChild(el);
     });
   wordBankEl.appendChild(col);
@@ -424,9 +430,9 @@ function fillPuzzle(options, pageEl, winRef, editable = false) {
   let answerElA = pageEl.querySelector("#answer-a");
   let answerElB = pageEl.querySelector("#answer-b");
   let answerElFact = pageEl.querySelector("#answer-fun-fact");
-  answerElA.innerText = plantNameA;
-  answerElB.innerText = plantNameB;
-  answerElFact.innerText = funFact;
+  answerElA.innerText = plantNameA + ".";
+  answerElB.innerText = plantNameB + ".";
+  answerElFact.innerText = funFact + ".";
   // Fill credits
   if (options.credits) {
     pageEl.querySelector(".credits-text").innerText = options.credits;
