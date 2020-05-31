@@ -130,30 +130,10 @@ function makeAnswerBlanks(
 }
 
 function fillImage(el, imageURL, domEl, winRef) {
-  if (imageURL) {
-    let downloadedImg = new winRef.Image();
-    downloadedImg.crossOrigin = "Anonymous";
-    downloadedImg.addEventListener(
-      "load",
-      () => {
-        let canvas = domEl.createElement("canvas");
-        let context = canvas.getContext("2d");
-        canvas.width = downloadedImg.width;
-        canvas.height = downloadedImg.height;
-        canvas.classList.add("plant-picture");
-        context.drawImage(downloadedImg, 0, 0);
-        el.appendChild(canvas);
-      },
-      false
-    );
-    downloadedImg.addEventListener("error", e => {
-      let img = domEl.createElement("img");
-      img.classList.add("plant-picture");
-      img.src = imageURL;
-      el.appendChild(img);
-    });
-    downloadedImg.src = imageURL;
-  }
+    let img = domEl.createElement("img");
+    img.classList.add("plant-picture");
+    img.src = imageURL;
+    el.appendChild(img);
 }
 
 function fillPlant(inputData, domEl, winRef) {
@@ -170,12 +150,6 @@ function fillPlant(inputData, domEl, winRef) {
   let nameEl = plantEl.querySelector(".plant-name .blank-container");
   let imageEl = plantEl.querySelector(".plant-frame");
   imageEl.innerHTML = "";
-  // let imgA = document.createElement("img");
-  // imgA.classList.add("plant-picture");
-  // imageElA.appendChild(imgA);
-  // imgA.src = options.imageA;
-  // imageElA.style.backgroundImage = `url("${options.imageA}")`;
-  // imageElA.querySelector("img").src = options.imageA;
   fillImage(imageEl, imageURL, domEl, winRef);
   nameEl.innerHTML = "";
   let hintEl = plantEl.querySelector(".hint");
