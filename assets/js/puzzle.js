@@ -252,8 +252,22 @@ function fillWordBank(inputData, domEl) {
 }
 
 function fillPuzzle(options, pageEl, winRef, editable = false) {
+  // Clean plant names
   options.nameA = cleanWords(options.nameA);
   options.nameB = cleanWords(options.nameB);
+  // Show ID, if present
+  if (options.id) {
+    const idEl = pageEl.querySelector(".id-holder");
+    idEl.innerText = `#${options.id}`;
+    idEl.classList.remove("hidden");
+  }
+  // Set difficulty level, if present
+  if (options.difficulty) {
+    const levelEl = pageEl.querySelector(".difficulty-holder");
+    levelEl.querySelector(".difficulty-level").innerText = options.difficulty;
+    levelEl.classList.remove("hidden");
+  }
+  // Create a map of given words
   let given = options.given || [];
   let givenMap = {};
   given.forEach(word => {

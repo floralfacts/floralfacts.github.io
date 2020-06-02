@@ -330,6 +330,17 @@ body {
   opacity: 0.25;
 }
 
+.difficulty-holder {
+  border: 2px solid black;
+  margin-top: -32pt;
+  padding: 5pt 10pt;
+  border-radius: 15px;
+  float: right;
+  font-family: 'Comfortaa', sans-serif;
+  font-size: 10pt;
+  line-height: 10pt;
+}
+
 @media screen and (max-width: 650px) {
 
   body {

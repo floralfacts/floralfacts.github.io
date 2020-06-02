@@ -135,7 +135,7 @@ async function main() {
         const id = data.id;
         const rawData = JSON.stringify(data);
         const encoded = encodeURIComponent(btoa(rawData));
-        const url = `file:${__dirname}/_layouts/puzzle.html?d=${encoded}`;
+        const url = `file:${__dirname}/_site/play.html?d=${encoded}`;
         let pdfPromise = savePageAs(browser, url + "&print=true", "pdf").then((res) => {
             console.log(`(${index + 1}/${puzzleDataArray.length}) Scraping puzzle PDF...`);
             return res;
