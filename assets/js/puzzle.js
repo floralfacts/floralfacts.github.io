@@ -9,9 +9,13 @@ function cleanWords(raw) {
 
 function makeBlanksEl(words, domEl, editable) {
   let hasSetAutofocus = false;
-  return words.map(word => {
+  return words.map((word, i) => {
     let el = domEl.createElement("div");
     el.classList.add("blank-word");
+    const readerEl = domEl.createElement("div");
+    readerEl.setAttribute("data-reader", "word-preview");
+    readerEl.setAttribute("aria-label", `Word number ${i + 1} has ${word.length} letters.`);
+    el.appendChild(readerEl);
     word.forEach(blank => {
       let space = domEl.createElement("div");
       space.classList.add("blank-space");
@@ -19,12 +23,14 @@ function makeBlanksEl(words, domEl, editable) {
       content.classList.add("blank-content");
       if (!blank.given && editable) {
         content.contentEditable = true;
+        content.setAttribute("role", "textbox");
         if (!hasSetAutofocus) {
           content.autofocus = true;
           hasSetAutofocus = true;
         }
       }
       let label = domEl.createElement("div");
+      label.setAttribute("aria-hidden", true);
       label.classList.add("blank-label");
       content.innerText = blank.content;
       label.innerText = blank.label;
@@ -32,6 +38,9 @@ function makeBlanksEl(words, domEl, editable) {
       space.appendChild(label);
       el.appendChild(space);
     });
+    const validatorEl = domEl.createElement("div");
+    validatorEl.setAttribute("data-reader", "validator");
+    el.appendChild(validatorEl);
     return el;
   });
 }
@@ -129,10 +138,11 @@ function makeAnswerBlanks(
   });
 }
 
-function fillImage(el, imageURL, domEl, winRef) {
+function fillImage(el, imageURL, alt, domEl, winRef) {
     let img = domEl.createElement("img");
     img.classList.add("plant-picture");
     img.src = imageURL;
+    img.setAttribute("alt", alt);
     el.appendChild(img);
 }
 
@@ -141,6 +151,7 @@ function fillPlant(inputData, domEl, winRef) {
     plantEl,
     plantName,
     imageURL,
+    alt,
     hint,
     numOffset,
     show,
@@ -149,8 +160,10 @@ function fillPlant(inputData, domEl, winRef) {
   } = inputData;
   let nameEl = plantEl.querySelector(".plant-name .blank-container");
   let imageEl = plantEl.querySelector(".plant-frame");
+  let descEl = plantEl.querySelector("[data-reader=plant-intro]");
+  descEl.setAttribute("aria-label", `This plant's name has ${plantName.split(" ").length} words.`);
   imageEl.innerHTML = "";
-  fillImage(imageEl, imageURL, domEl, winRef);
+  fillImage(imageEl, imageURL, alt, domEl, winRef);
   nameEl.innerHTML = "";
   let hintEl = plantEl.querySelector(".hint");
   hintEl.style.display = "none";
@@ -163,6 +176,7 @@ function fillPlant(inputData, domEl, winRef) {
     nameEl.appendChild(el);
   });
   if (hint) {
+    plantEl.querySelector("[data-reader=hint]").setAttribute("aria-label", `Here is a hint: ${hint}`);
     hintEl.querySelector(".hint-text").innerText = hint;
     hintEl.style.display = "inline-block";
   }
@@ -206,6 +220,8 @@ function fillWordBank(inputData, domEl) {
   } else if (wordOptions.length <= 8) {
     perCol = 2
   }
+  const readerEl = domEl.querySelector("[data-reader=word-bank]");
+  readerEl.setAttribute("aria-label", `The word bank has ${wordOptions.length} words.`);
   let col = domEl.createElement("div");
   col.classList.add("word-column");
   wordOptions
@@ -224,7 +240,7 @@ function fillWordBank(inputData, domEl) {
       let el = domEl.createElement("div");
       el.classList.add("word-option");
       let caption = domEl.createElement("span");
-      caption.setAttribute("aria-label", `Word number ${i + 1}: ${word}.`);
+      caption.setAttribute("aria-label", `Word number ${i + 1} is ${word}, which has ${word.length} letters.`);
       let option = domEl.createElement("span");
       option.setAttribute("aria-hidden", true);
       option.innerText = word;
@@ -249,6 +265,7 @@ function fillPuzzle(options, pageEl, winRef, editable = false) {
       plantEl: pageEl.querySelector("#plant-a"),
       plantName: options.nameA,
       imageURL: options.imageA,
+      alt: "Image of the first plant.",
       hint: options.hintA,
       numOffset: 1,
       show: options.show,
@@ -267,6 +284,7 @@ function fillPuzzle(options, pageEl, winRef, editable = false) {
       plantEl: pageEl.querySelector("#plant-b"),
       plantName: options.nameB,
       imageURL: options.imageB,
+      alt: "Image of the second plant.",
       hint: options.hintB,
       numOffset: labelOffset,
       show: options.show,
@@ -302,7 +320,7 @@ function fillPuzzle(options, pageEl, winRef, editable = false) {
     };
     const keyIsAllowed = e => !(e.keyCode in blockedKeys);
     const moveToNextBlank = el => {
-      if (el.parentElement.nextElementSibling) {
+      if (el.parentElement.nextElementSibling && !el.parentElement.nextElementSibling.hasAttribute("data-reader")) {
         // Jump to next blank in word
         let nextBlankInWord = el.parentElement.nextElementSibling.querySelector(
           ".blank-content"
@@ -325,8 +343,8 @@ function fillPuzzle(options, pageEl, winRef, editable = false) {
       }
     };
     const moveToPrevBlank = el => {
-      if (el.parentElement.previousElementSibling) {
-        // Jump to next blank in word
+      if (el.parentElement.previousElementSibling && !el.parentElement.previousElementSibling.hasAttribute("data-reader")) {
+        // Jump to previous blank in word
         let prevBlankInAnswer = el.parentElement.previousElementSibling.querySelector(".blank-content");
         if (prevBlankInAnswer.contentEditable === "true") {
           prevBlankInAnswer.focus();

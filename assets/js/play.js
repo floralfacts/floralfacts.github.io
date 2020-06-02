@@ -73,8 +73,10 @@ function showBlankContainerValidation(
   enteredAnswer,
   expectedAnswer
 ) {
+  const wordValidatorEl = blankContainerEl.querySelector("[data-reader=validator]");
   if (enteredAnswer === expectedAnswer) {
     blankContainerEl.classList.add("correct-answer");
+    wordValidatorEl.setAttribute("aria-label", `Correct, the word is ${expectedAnswer}`);
   } else {
     blankContainerEl.classList.remove("correct-answer");
   }

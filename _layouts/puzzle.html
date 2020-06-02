@@ -27,24 +27,30 @@
         <p class="body-text centered-on-responsive">Use the word bank to guess the names of these plants. If you are correct, you will discover a fun fact they have in common!</p>
       </div>
       <div class="puzzle-block">
-        <div aria-label="The word bank has the following words:"></div>
+        <div data-reader="word-bank"></div>
         <div class="word-bank"></div>
       </div>
       <div id="plant-a" class="puzzle-block plant-block">
+        <div aria-label="Guess the name of the first plant."></div>
+        <div data-reader="plant-intro"></div>
         <div class="plant-frame"></div>
         <div class="plant-name">
+          <div data-reader="hint"></div>
           <div class="blank-container"></div>
           <div class="hint">
-            <p><span class="is-h4 header-text">Hint:</span><span class="hint-text"></span></p>
+            <p aria-hidden="true"><span class="is-h4 header-text">Hint:</span><span class="hint-text"></span></p>
           </div>
         </div>
       </div>
       <div id="plant-b" class="puzzle-block plant-block">
+        <div aria-label="Guess the name of the second plant."></div>
+        <div data-reader="plant-intro"></div>
         <div class="plant-frame"></div>
         <div class="plant-name">
+          <div data-reader="hint"></div>
           <div class="blank-container"></div>
           <div class="hint">
-            <p><span class="is-h4 header-text">Hint:</span><span class="hint-text"></span></p>
+            <p><span aria-hidden="true" class="is-h4 header-text">Hint:</span><span class="hint-text"></span></p>
           </div>
         </div>
       </div>
