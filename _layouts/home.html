@@ -44,7 +44,7 @@
             {% else colorType %}
               {% assign colorType = "Color" %}
             {% endif %}
-            <tr>
+            <tr class="puzzle-row">
               <td>{{ puzzle.name }}</td>
               <td><a href="/play/{{ puzzle.slug }}">Play</a></td>
               <td>{{ puzzle.difficulty }}</td>
@@ -58,5 +58,6 @@
       <hr>
       <p class="centered"><a href="/editor">Puzzle Editor</a></p>
     </div>
+    <script src="../assets/js/home.js" defer></script>
   </body>
 </html>

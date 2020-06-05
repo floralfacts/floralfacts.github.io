@@ -49,9 +49,16 @@ hr {
   width: 200px;
 }
 
-tr:hover {
+.puzzle-row:hover {
   background: #6ff2b3;
   font-weight: bold;
+  text-decoration: none !important;
+  opacity: 1.0 !important;
+}
+
+.puzzle-row.completed{
+  text-decoration: line-through;
+  opacity: 0.25;
 }
 
 .demo-holder {

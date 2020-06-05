@@ -90,6 +90,11 @@ function showWholePageValidation(
   if (enteredAnswer === expectedAnswer) {
     document.querySelector(".confetti-container").classList.remove("hidden");
     // document.querySelector(".answer-text").classList.remove("rotated-180");
+    const slugEl = document.querySelector("#slug");
+    if (slugEl && slugEl.innerText) {
+      const slug = slugEl.innerText;
+      localStorage.setItem(`floralfacts_finished_${slug}`, true);
+    }
   } else {
     document.querySelector(".confetti-container").classList.add("hidden");
     // document.querySelector(".answer-text").classList.add("rotated-180");
