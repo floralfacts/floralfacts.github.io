@@ -226,3 +226,9 @@ if (params.d) {
     failureCallback
   );
 }
+
+if (localStorage.hasOwnProperty("floralfacts_wheel_of_fortune")) {
+  Array.from(document.querySelectorAll(".fortune-hide")).forEach((el) => {
+    el.classList.add("hidden");
+  });
+}
